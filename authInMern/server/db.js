@@ -5,11 +5,13 @@ module.exports =  () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     };
-    try {
-        mongoose.connect(process.env.DB, connectionParams);
-        console.log('Connected to database ');
-    } catch (error) {
-
-    }
-}
-
+    
+    //Connect to MongoDB using the connection string from .env file
+    mongoose.connect(process.env.MONGODB_URI, connectionParams)
+        .then(() => {
+            console.log("Connected to MongoDB"); //success msg
+        })
+        .catch((error) => {
+            console.error('Database connection error', error); //error msg
+        });
+};
