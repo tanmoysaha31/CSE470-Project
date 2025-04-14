@@ -1,6 +1,6 @@
-<h1>Please read fellas before coding</h1><br>
-<p>
-this is just UI and not actually connected to db<br>
+<h1>Please read</h1><br>
+<br>
+<p>Open two terminal windows then run below bashes<br>
 
 ```sh
 cd client
@@ -11,5 +11,16 @@ cd client
 npm run dev
 ```
 <br>
-get started -> register page
+you must get link to open, now goto another terminal windows and run-> <br>
+
+```sh
+cd server
+```
+<br>
+
+```sh
+npm start
+```
+<br>
+now you must see, Server is running on port <port> and mongodb connected
 </p>
