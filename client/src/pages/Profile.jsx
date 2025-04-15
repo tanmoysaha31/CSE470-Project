@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/userContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faCamera } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/profile.css';
 
 export default function Profile() {
@@ -10,8 +10,10 @@ export default function Profile() {
     firstName: '',
     lastName: '',
     email: '',
-    password: ''
+    password: '',
+    profilePicture: null,
   });
+  const [preview, setPreview] = useState(null);
 
   // When user data is available, split the full name into first and last name
   useEffect(() => {
@@ -20,7 +22,8 @@ export default function Profile() {
       const spaceIndex = fullName.indexOf(' ');
       const firstName = spaceIndex > -1 ? fullName.substring(0, spaceIndex) : fullName;
       const lastName = spaceIndex > -1 ? fullName.substring(spaceIndex + 1) : "";
-      setProfile({ firstName, lastName, email: user.email, password: '' });
+      setProfile({ firstName, lastName, email: user.email, password: '', profilePicture: user.profilePicture || null });
+      setPreview(user.profilePicture || null);
     }
   }, [user]);
 
@@ -28,14 +31,22 @@ export default function Profile() {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfile({ ...profile, profilePicture: file });
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
   const handleSave = (e) => {
     e.preventDefault();
-    // Combine first and last name to form full name and send along with email and password
     const fullName = `${profile.firstName} ${profile.lastName}`;
     console.log("Saved Profile:", {
       name: fullName,
       email: profile.email,
-      password: profile.password
+      password: profile.password,
+      profilePicture: profile.profilePicture,
     });
     // TODO: Call your update profile API here.
   };
@@ -45,6 +56,28 @@ export default function Profile() {
       <h1 className="profile-header">Profile</h1>
       <div className="profile-form-container">
         <form onSubmit={handleSave} className="profile-form">
+          <div className="profile-item mb-5">
+            <div className="profile-picture-container">
+              <label htmlFor="profilePicture" className="profile-picture-label">
+                {preview ? (
+                  <img src={preview} alt="Profile Preview" className="profile-picture" />
+                ) : (
+                  <div className="profile-placeholder">
+                    <FontAwesomeIcon icon={faCamera} className="camera-icon" />
+                    <span>Upload Picture</span>
+                  </div>
+                )}
+              </label>
+              <input
+                type="file"
+                id="profilePicture"
+                name="profilePicture"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="profile-picture-input"
+              />
+            </div>
+          </div>
           <div className="profile-item mb-5">
             <div className="name-group">
               <div className="name-field">
