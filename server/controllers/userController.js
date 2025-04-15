@@ -16,5 +16,39 @@ exports.updateProfile = async( req,res ) =>{
         }
 
         //Fields that are allowed to be updated
+        const allowedUpdates = [
+            'name',
+            'email',
+            'password',
+            //We can edit and add more
+        ];
+
+        //Filter out fields that are not allowed to be updated
+        const updates = {};
+        Object.keys(req.body).forEach(key => {
+            if (allowedUpdataes.includes(key)) {
+                updates[key] = req.body[key];
+            }
+        });
+
+
+        //Update user profile
+        const updateUser = await User.findIdAndUpdate(
+            id,
+            { $set: updates },
+            { new: true, runValidators: true }
+        ).select('-password'); //
+
+        res.status(200).json({
+            success: true,
+            data: updateUser
+        });
+    }   catch (error) {
+        console.error('Profile update error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error updating profile',
+            error: error.message 
+        });
     }
-}
+};
