@@ -47,3 +47,62 @@
 .profile-form .form-control {
   width: 100%;
 }
+
+/* Profile Picture Container */
+.profile-picture-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Circular Profile Picture */
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover;
+  border: 3px solid #007bff; /* Add a border to match the theme */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Placeholder for Profile Picture */
+.profile-placeholder {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* Circular placeholder */
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed #ccc;
+  color: #888;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Camera Icon in Placeholder */
+.camera-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #007bff;
+}
+
+/* Hidden File Input */
+.profile-picture-input {
+  display: none;
+}
+
+/* Label for File Input */
+.profile-picture-label {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: transform 0.2s ease-in-out;
+}
+
+.profile-picture-label:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
