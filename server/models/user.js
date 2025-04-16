@@ -14,7 +14,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-})
+    profilePic: {
+        type: String, //check
+        default: ""
+    }
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
