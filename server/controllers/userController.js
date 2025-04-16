@@ -20,13 +20,15 @@ exports.updateProfile = async( req,res ) =>{
             'name',
             'email',
             'password',
+            'bio',
+            'address',
             //We can edit and add more
         ];
 
         //Filter out fields that are not allowed to be updated
         const updates = {};
         Object.keys(req.body).forEach(key => {
-            if (allowedUpdataes.includes(key)) {
+            if (allowedUpdates.includes(key)) {
                 updates[key] = req.body[key];
             }
         });
