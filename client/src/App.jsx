@@ -4,6 +4,7 @@ import Navbar from "./components/homeNavbar";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Overview from "./pages/Overview";
 import Profile from './pages/Profile';
 import Tasks from './pages/Tasks';
 import Calendar from './pages/Calendar';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Dashboard" element={<Dashboard />}>
+        <Route path="Overview" element={<Overview />} />
           <Route path="Profile" element={<Profile />} />
           <Route path="Tasks" element={<Tasks />} />
           <Route path="Calendar" element={<Calendar />} />

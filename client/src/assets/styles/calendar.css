@@ -125,3 +125,111 @@
     color: #ffffff;
 }
 
+[data-theme="dark"] .fc-toolbar-title {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .fc-daygrid-day.fc-day-today {
+    background-color: transparent !important;
+}
+
+[data-theme="dark"] .fc .fc-day-today .fc-daygrid-day-number {
+    background: linear-gradient(135deg,
+    #ffd700 0%, /*yellow*/
+    #4169e1 20%, /*blue*/
+    #9932cc 40%, /*purple*/
+    #ff69b4 60%, /*pink*/
+    #ff4444 80%, /*red*/
+    #ff8c00 100% /*orange*/
+    );
+    color: white;
+}
+
+
+/* Model Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+  .model-content {
+    background-color: var(--bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+  
+/* Form Styling */
+.form-group label {
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    display: block;
+}
+  
+.form-control {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+  
+.form-control:focus {
+    background-color: var(--bg-secondary);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+  
+.form-check-label {
+    color: var(--text-primary);
+}
+  
+  .modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+  
+/* Gradient Focus Effects */
+    .modal-content .form-control:focus,
+    .modal-content select.form-control:focus,
+    .modal-content textarea.form-control:focus {
+    outline: none;
+    border: 3px solid transparent;
+    background-image: linear-gradient(var(--bg-primary), var(--bg-primary)),
+                     linear-gradient(135deg,
+                        #ffd700 0%,    /* yellow */
+                        #4169e1 20%,   /* blue */
+                        #9932cc 40%,   /* purple */
+                        #ff69b4 60%,   /* pink */
+                        #ff4444 80%,   /* red */
+                        #ff8c00 100%   /* orange */
+                     );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: none;
+  }
+  

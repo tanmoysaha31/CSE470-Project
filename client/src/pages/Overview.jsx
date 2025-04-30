@@ -6,6 +6,7 @@ import axio from 'axios';
 import { format } from 'date-fns';
 import '../assets/styles/tasks.css';
 
+<<<<<<< HEAD:client/src/pages/Tasks.jsx
 export default function Tasks() {
   const{ user } = useContext(UserContext);
   const[tasks, setTasks] = useState([]);
@@ -91,3 +92,15 @@ export default function Tasks() {
 
 
 }
+=======
+export default function Overview() {
+  const { user } = useContext(UserContext)
+  
+  return (
+    <div>
+      <h1>Overview</h1>
+      <h2>This is Overview page</h2>
+    </div>
+  )
+}
+>>>>>>> 5283b8982de163eeae2aa0d93c472b70bfeb8741:client/src/pages/Overview.jsx
