@@ -29,7 +29,7 @@ export default function Login() {
             } else {
                 setFormData({});
                 toast.success("Login successful");
-                navigate("/Dashboard");
+                navigate("/Dashboard/Overview");
                 window.location.reload();
             }
         } catch (error) {

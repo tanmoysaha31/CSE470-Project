@@ -1,0 +1,124 @@
+:root[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #dee2e6;
+  --navbar-bg: #ffffff;
+  --navbar-shadow: rgba(0, 0, 0, 0.075);
+  --sidebar-bg: #dee5ec;
+  --sidebar-hover: rgba(37, 35, 35, 0.164);
+  --sidebar-text: #070000;
+}
+
+:root[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #1a1a1a;
+  --text-primary: #ffffff; 
+  --text-secondary: #ced4da;
+  --border-color: #495057;
+  --navbar-bg: #242424;
+  --navbar-shadow: rgba(0, 0, 0, 0.15);
+  --sidebar-bg: #2c2c2c;
+  --sidebar-hover: rgba(255, 255, 255, 0.1);
+  --sidebar-text: #ffffff;
+}
+
+/* Apply variables to elements */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.navbar {
+  background-color: var(--navbar-bg) !important;
+  box-shadow: 0 1px 3px var(--navbar-shadow);
+}
+
+.nav-link {
+  color: var(--text-primary) !important;
+}
+
+/* Add sidebar theme styles */
+#sidebar {
+  background-color: var(--sidebar-bg) !important;
+}
+
+.sidebar-logo a, 
+.sidebar-logo span,
+.toggle-btn i,
+.toggle-btn svg,
+a.sidebar-link {
+  color: var(--sidebar-text) !important;
+}
+
+a.sidebar-link:hover,
+a.sidebar-link.active {
+  background-color: var(--sidebar-hover) !important;
+  color: var(--sidebar-text) !important;
+}
+
+#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+  background-color: var(--sidebar-bg) !important;
+}
+
+.sidebar-footer {
+  border-color: var(--border-color) !important;
+}
+
+.main {
+  background-color: var(--bg-secondary);
+}
+
+/* Notification Menu Styles */
+.notification-menu-container {
+    position: relative;
+}
+
+.notification-popup-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 250px;
+    z-index: 9999;
+    animation: menuFadeIn 0.2s ease-in-out;
+}
+
+.notification-header {
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.notification-divider {
+    margin: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.notification-item {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+    background-color: var(--sidebar-hover);
+    color: var(--text-primary);
+}
+
+/* @keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+} */
