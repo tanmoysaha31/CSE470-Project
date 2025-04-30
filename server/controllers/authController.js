@@ -84,3 +84,4 @@ const getProfile = (req, res) => {
     }
 }
 module.exports = {test,registerUser,loginUser,getProfile}
+

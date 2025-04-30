@@ -14,7 +14,15 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-})
+    bio: {
+        type: String,
+        default: ''
+    },
+    address: {
+        type: String,
+        default: ''
+    },
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
