@@ -1,0 +1,127 @@
+/* Main calendar container */
+.calendar-container {
+    padding: 1rem;
+    height: calc(100vh - 64px);
+    background-color: var(--bg-primary);
+}
+
+/* Full calendar base style */
+.fc {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.fc .fc-toolbar-title {
+    color: var(--text-primary);
+}
+
+/* Button Styling */
+.fc .fc-button {
+    background-color: var(--sidebar-bg);
+    border: none;
+    color: var(--text-primary);
+    box-shadow: none;
+}
+
+.fc .fc-button:hover {
+    background-color: #4169e1;
+    color: white;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+    background-color: #4169e1;
+    border: none;
+    color: white;
+}
+
+.fc .fc-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.fc .fc-today-button:disabled {
+    background-color: #4169e1;
+    color: white;
+    opacity: 1;
+}
+
+/* Calendar Grid */
+.fc-theme-standard td, 
+.fc-theme-standard th,
+.fc-theme-standard .fc-divider {
+    border-color: var(--border-color);
+}
+
+/* Todays date styling */
+.fc .fc-day-today {
+    background-color: transparent;
+}
+
+.fc .fc-date-today .fc-daygrid-day-number {
+    background: linear-gradient(
+        135deg,
+        #ffd700 0%,    /* yellow */
+        #4169e1 20%,   /* blue */
+        #9932cc 40%,   /* purple */
+        #ff69b4 60%,   /* pink */
+        #ff4444 80%,   /* red */
+        #ff8c00 100%   /* orange */
+    );
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* Event Styling */
+
+.fc-event {
+    border: none;
+    padding: 1px 4px;
+    border-radius: 4px;
+    margin: 1px 0;
+    line-height: 1.2;
+}
+
+.fc-event-title {
+    font-weight: 500;
+    font-size: 0.9em;
+    padding: 2px 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task-event,
+.normal-event {
+    border-radius: 4px;
+}
+
+.fc-daygrid-event {
+    min-height: unset;
+    height: auto;
+}
+
+/* Dark mode styling */
+
+[data-theme="dark"] .fc-theme-standard .fc-scrollgrid,
+[data-theme="dark"] .fc th {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .fc,
+[data-theme="dark"] .fc-day-today,
+[data-theme="dark"] .fc a,
+[data-theme="dark"] .fc-col-header-cell,
+[data-theme="dark"] .fc-daygrid-day-number,
+[data-theme="dark"] .fc .fc-button {
+    color: #ffffff;
+}
+
