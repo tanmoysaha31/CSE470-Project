@@ -83,4 +83,64 @@ const getProfile = (req, res) => {
         res.json(null)
     }
 }
-module.exports = {test,registerUser,loginUser,getProfile}
+
+const updateProfile = async (req, res) => {
+    try {
+        const { token } = req.cookies;
+        if (!token) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const { name, email, password } = req.body;
+        
+        const updateFields = {};
+        if (name) updateFields.name = name;
+        if (email) updateFields.email = email;
+        if (password) {
+            const hashedPassword = await hashPassword(password);
+            updateFields.password = hashedPassword;
+        }
+
+        const user = await User.findByIdAndUpdate(
+            decoded.id,
+            updateFields,
+            { new: true }
+        );
+
+        // Generate new token with updated info
+        const newToken = jwt.sign(
+            { email: user.email, id: user._id, name: user.name },
+            process.env.JWT_SECRET
+        );
+
+        // Set the new token in cookie
+        res.cookie('token', newToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        });
+
+        return res.json({
+            message: 'Profile updated successfully',
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Error updating profile' });
+    }
+};
+
+
+module.exports = { 
+    test, 
+    registerUser, 
+    loginUser, 
+    getProfile,
+    updateProfile 
+}
