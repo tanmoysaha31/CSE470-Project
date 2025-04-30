@@ -60,6 +60,34 @@ export default function Tasks() {
       );
   };
 
+  const highlight = (text, searchTerm) => {
+    if (!searchTerm) return text;
+
+    const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'));
+    return parts.map((part,index) =>
+      part.toLowerCase() === searchTerm.toLoweCase() ? <span key={index} className="highlight-text">{part}</span> : part
+    );
+  };
+
+  const renderItems = (items) => {
+    if (items.length === 0) {
+      return <div className="empty-state">No items to display</div>;
+    }
+
+    return items.map(item => {
+      const hasMatch = searchTerm && ( item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
+
+      );
+
+      return(
+        <div key={item._id} className={`item-card ${hasMatch ? 'highlight-card' : ''}`}>
+          </div>
+
+      )
+    })
+  }
+
 
 
 }
