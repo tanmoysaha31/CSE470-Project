@@ -18,32 +18,34 @@
 /* Button Styling */
 .fc .fc-button {
     background-color: var(--sidebar-bg);
-    border: none;
+    border: none !important; /* Remove border */
     color: var(--text-primary);
-    box-shadow: none;
+    box-shadow: none !important; /* remove box shadow */
 }
 
 .fc .fc-button:hover {
-    background-color: #4169e1;
-    color: white;
+    background-color: #4169e1 !important; /* Blue hover */
+    color: white !important;
 }
 
 .fc .fc-button-primary:not(:disabled).fc-button-active,
 .fc .fc-button-primary:not(:disabled):active {
-    background-color: #4169e1;
-    border: none;
-    color: white;
+    background-color: #4169e1 !important; /* Blue for active state */
+    border: none !important;
+    color: white !important;
 }
 
+/*Remove focus outline */
 .fc .fc-button:focus {
-    outline: none;
-    box-shadow: none;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
+/* Style for today button */
 .fc .fc-today-button:disabled {
-    background-color: #4169e1;
-    color: white;
-    opacity: 1;
+    background-color: #4169e1 !important;
+    color: white !important;
+    opacity: 1 !important;
 }
 
 /* Calendar Grid */
@@ -53,9 +55,16 @@
     border-color: var(--border-color);
 }
 
+/* Remove or comment out the existing today style */
+/* .fc .fc-day-today {
+    background-color: var(--sidebar-hover) !important;
+} */
+ /* is this needed???? */
+
+
 /* Todays date styling */
 .fc .fc-day-today {
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 .fc .fc-date-today .fc-daygrid-day-number {
@@ -75,7 +84,7 @@
     align-items: center;
     justify-content: center;
     margin: 4px;
-    color: white;
+    color: white !important;
     font-size: 1.1em;
     font-weight: 500;
 }
@@ -84,29 +93,31 @@
 
 .fc-event {
     border: none;
-    padding: 1px 4px;
+    padding: 1px 4px !important; /* reduced padding */
     border-radius: 4px;
-    margin: 1px 0;
-    line-height: 1.2;
+    margin: 1px 0 !important; /* add small margin */
+    line-height: 1.2 !important; /* redduce line height */
 }
 
+/* update event title styles */
 .fc-event-title {
     font-weight: 500;
     font-size: 0.9em;
-    padding: 2px 4px;
+    padding: 2px 4px !important;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+/* Diff styles for tasks and events */
 .task-event,
 .normal-event {
-    border-radius: 4px;
+    border-radius: 4px !important; /* Wrote all together. Is this okay??? */
 }
 
 .fc-daygrid-event {
-    min-height: unset;
-    height: auto;
+    min-height: unset !important; /*remove min height */
+    height: auto !important; /* allow content to determine height */
 }
 
 /* Dark mode styling */
@@ -116,11 +127,20 @@
     border-color: var(--border-color);
 }
 
-[data-theme="dark"] .fc,
-[data-theme="dark"] .fc-day-today,
+[data-theme="dark"] .fc {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .fc-day-today {
+    color: #ffffff !important;
+}
+
 [data-theme="dark"] .fc a,
 [data-theme="dark"] .fc-col-header-cell,
-[data-theme="dark"] .fc-daygrid-day-number,
+[data-theme="dark"] .fc-daygrid-day-number {
+    color: #ffffff;
+}
+
 [data-theme="dark"] .fc .fc-button {
     color: #ffffff;
 }
@@ -142,7 +162,7 @@
     #ff4444 80%, /*red*/
     #ff8c00 100% /*orange*/
     );
-    color: white;
+    color: white !important;
 }
 
 
@@ -160,7 +180,7 @@
     z-index: 1000;
 }
 
-  .model-content {
+.model-content {
     background-color: var(--bg-primary);
     padding: 20px;
     border-radius: 8px;
@@ -206,7 +226,7 @@
     color: var(--text-primary);
 }
   
-  .modal-footer {
+.modal-footer {
     margin-top: 20px;
     display: flex;
     justify-content: flex-end;
@@ -214,9 +234,8 @@
 }
   
 /* Gradient Focus Effects */
-    .modal-content .form-control:focus,
-    .modal-content select.form-control:focus,
-    .modal-content textarea.form-control:focus {
+.modal-content .form-control:focus {  /* Update form control styles with gradient border */
+
     outline: none;
     border: 3px solid transparent;
     background-image: linear-gradient(var(--bg-primary), var(--bg-primary)),
@@ -231,5 +250,23 @@
     background-origin: border-box;
     background-clip: padding-box, border-box;
     box-shadow: none;
-  }
+}
+    
+.modal-content select.form-control:focus, /* Add gradient border to select element on focus */
+.modal-content textarea.form-control:focus {
+    outline: none;
+    border: 3px solid transparent;
+    background-image: linear-gradient(var(--bg-primary), var(--bg-primary)),
+                     linear-gradient(135deg,
+                        #ffd700 0%,    /* yellow */
+                        #4169e1 20%,   /* blue */
+                        #9932cc 40%,   /* purple */
+                        #ff69b4 60%,   /* pink */
+                        #ff4444 80%,   /* red */
+                        #ff8c00 100%   /* orange */
+                     );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
   
