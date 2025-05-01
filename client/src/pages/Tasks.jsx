@@ -60,12 +60,12 @@ export default function Tasks() {
       );
   };
 
-  const highlight = (text, searchTerm) => {
+  const highlightText = (text, searchTerm) => {
     if (!searchTerm) return text;
 
     const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'));
     return parts.map((part,index) =>
-      part.toLowerCase() === searchTerm.toLoweCase() ? <span key={index} className="highlight-text">{part}</span> : part
+      part.toLowerCase() === searchTerm.toLowerCase() ? <span key={index} className="highlight-text">{part}</span> : part
     );
   };
 
@@ -75,14 +75,22 @@ export default function Tasks() {
     }
 
     return items.map(item => {
-      const hasMatch = searchTerm && ( item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
-
+      const hasMatch = searchTerm && ( item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
+      || (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        /* check this part */
       );
 
       return(
         <div key={item._id} className={`item-card ${hasMatch ? 'highlight-card' : ''}`}>
+          <div className= "item-title">
+            {highlightText(item.title, searchTerm) }
           </div>
+          {item.description && (
+            <div className="item-description">
+              {highlightText(item.description, searchTerm) }
+            </div> 
+          )}
+          
 
       )
     })
