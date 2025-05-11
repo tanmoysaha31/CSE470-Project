@@ -25,3 +25,13 @@ app.use('/api/users', userRoutes);
 
 const port = 8000;
 app.listen(port, () => console.log("Server is running on port " + port));
+
+
+
+// server.js (add these lines to your existing server.js)
+const expenseRoutes = require('./routes/api/expenses');
+const incomeRoutes = require('./routes/api/incomes');
+
+// Add routes
+app.use('/api/expenses', expenseRoutes);
+app.use('/api/incomes', incomeRoutes);
