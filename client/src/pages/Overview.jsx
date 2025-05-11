@@ -6,6 +6,7 @@ import axio from 'axios';
 import { format } from 'date-fns';
 import '../assets/styles/tasks.css';
 
+<<<<<<< HEAD:client/src/pages/Tasks.jsx
 export default function Tasks() {
   const{ user } = useContext(UserContext);
   const[tasks, setTasks] = useState([]);
@@ -60,12 +61,12 @@ export default function Tasks() {
       );
   };
 
-  const highlightText = (text, searchTerm) => {
+  const highlight = (text, searchTerm) => {
     if (!searchTerm) return text;
 
     const parts = text.split(new RegExp(`(${searchTerm})`, 'gi'));
     return parts.map((part,index) =>
-      part.toLowerCase() === searchTerm.toLowerCase() ? <span key={index} className="highlight-text">{part}</span> : part
+      part.toLowerCase() === searchTerm.toLoweCase() ? <span key={index} className="highlight-text">{part}</span> : part
     );
   };
 
@@ -75,26 +76,31 @@ export default function Tasks() {
     }
 
     return items.map(item => {
-      const hasMatch = searchTerm && ( item.title.toLowerCase().includes(searchTerm.toLowerCase()) 
-      || (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
-        /* check this part */
+      const hasMatch = searchTerm && ( item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase()))
+
       );
 
       return(
         <div key={item._id} className={`item-card ${hasMatch ? 'highlight-card' : ''}`}>
-          <div className= "item-title">
-            {highlightText(item.title, searchTerm) }
           </div>
-          {item.description && (
-            <div className="item-description">
-              {highlightText(item.description, searchTerm) }
-            </div> 
-          )}
-          
 
       )
     })
   }
 
 
+
 }
+=======
+export default function Overview() {
+  const { user } = useContext(UserContext)
+  
+  return (
+    <div>
+      <h1>Overview</h1>
+      <h2>This is Overview page</h2>
+    </div>
+  )
+}
+>>>>>>> 5283b8982de163eeae2aa0d93c472b70bfeb8741:client/src/pages/Overview.jsx
