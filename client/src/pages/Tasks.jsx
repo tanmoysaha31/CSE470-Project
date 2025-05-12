@@ -90,11 +90,80 @@ export default function Tasks() {
               {highlightText(item.description, searchTerm) }
             </div> 
           )}
+          <div className = "item-date">
+            {format (new Date(item.start), 'dd/MM/yyyy')}
+          </div>
+        </div>
           
 
-      )
-    })
+      );
+    });
+  };
+
+  if (loading) {
+    return <div className = "loading">Loading...</div>;
+    
   }
 
+  return (
+    <div className = 'tasks-container'>
+      <div className = 'search-container mb-4'>
+        <div className = 'search-wrapper'>
+          <FontAwesomeIcon icon = {faSearch} className = 'search-icon' />
+          <input
+            type = 'text'
+            className = 'search-input'
+            placeholder = 'Search tasks and events...'
+            value = {searchTerm}
+            onChange = { (e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
 
+      <div className = 'tasks-grid'>
+        <div className = 'tasks-column'>
+          <div className = 'section-header'>
+            <FontAwesomeIcon icon = {faListCheck} />
+            <h2>Tasks</h2>
+          </div>
+          <div className = 'timeline-section'>
+            <h3> Due Tasks</h3>
+            {renderItems(filterItems(tasks, 'task', 'past'))}
+          </div>
+          <div className = 'timeline-section'>
+            <h3>Today's Tasks</h3>
+            {renderItems(filterItems(tasks, 'task', 'today'))}
+          </div>
+
+          <div className="timeline-section">
+            <h3>Upcoming Tasks</h3>
+            {renderItems (filterItems(tasks, 'task', 'upcoming'))}
+          </div>  
+        </div>
+
+        <div className="events-column">
+          <div className="section-header">
+            <FontAwesomeIcon icon={faCalendar} />
+            <h2>Events</h2>
+          </div>
+
+           <div className="timeline-section">
+            <h3>Past Events</h3>
+            {renderItems(filterItems(tasks, 'event', 'past'))}
+          </div>
+
+          <div className="timeline-section">
+            <h3>Today's Events</h3>
+            {renderItems(filterItems(tasks, 'event', 'today'))}
+          </div>
+
+          <div className="timeline-section">
+            <h3>Upcoming Events</h3>
+            {renderItems(filterItems(tasks, 'event', 'upcoming'))}
+          </div>
+
+      </div>
+    </div>
+  </div>
+  );
 }
