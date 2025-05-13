@@ -2,14 +2,12 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowTrendUp, faCalendarCheck, faBrain, faListCheck, faRightFromBracket, faShield, faUser, faTableColumns } from '@fortawesome/free-solid-svg-icons';
+import { faArrowTrendUp, faCalendarCheck, faBrain, faListCheck,  faUser,  faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/dashboard.css';
+import Navbar from "../components/dashboardNavbar";
 
 export default function Dashboard() {
-    const { user } = useContext(UserContext);
-    const location = useLocation();
-    const showGreeting = location.pathname === "/Dashboard";
-    
+    const location = useLocation();    
     const [isExpanded, setIsExpanded] = useState(() => {
         const savedState = localStorage.getItem('sidebarExpanded');
         return savedState ? JSON.parse(savedState) : true; // default expanded
@@ -24,26 +22,28 @@ export default function Dashboard() {
     };
     
     return (
+        <>
+        <Navbar />
         <div className="wrapper">
             <aside id="sidebar" className={isExpanded ? "expand" : ""}>
                 <div className="d-flex">
                     <button className="toggle-btn" type="button" onClick={toggleSidebar}>
-                        <FontAwesomeIcon icon={faTableColumns} />
+                        <FontAwesomeIcon icon={faBars} />
                     </button> 
-                    <div className="sidebar-logo">
-                        <NavLink to="/Dashboard">
-                            <img src="/vite.svg" className="logo" />
-                            <span className="logo-text">LifeSync</span>
-                        </NavLink>
-                    </div>
                 </div>
                 <ul className="sidebar-nav">
                     <li className="sidebar-item mb-3">                                
+                        <NavLink to="Overview" className="sidebar-link">
+                            <FontAwesomeIcon icon={faHome} />
+                            <span>Overview</span>
+                        </NavLink>
+                    </li>
+                    {/* <li className="sidebar-item mb-3">                                
                         <NavLink to="Profile" className="sidebar-link">
                             <FontAwesomeIcon icon={faUser} />
                             <span>Profile</span>
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li className="sidebar-item mb-3">                                
                         <NavLink to="Tasks" className="sidebar-link">
                             <FontAwesomeIcon icon={faListCheck} />
@@ -65,10 +65,10 @@ export default function Dashboard() {
                     <li className="sidebar-item mb-3">                                
                         <NavLink to="Lifesyncai" className="sidebar-link">
                             <FontAwesomeIcon icon={faBrain} />
-                            <span>LifeSync AI (experimental)</span>
+                            <span>LifeSync AI</span>
                         </NavLink>
                     </li>
-                    <li className="sidebar-item mb-3">
+                    {/* <li className="sidebar-item mb-3">
                         <a href="#" className="sidebar-link has-dropdown collapsed" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                             <FontAwesomeIcon icon={faShield} />
                             <span>Auth</span>
@@ -81,21 +81,15 @@ export default function Dashboard() {
                                 <a href="/Register" className="sidebar-link">Register</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> */}
                 </ul>
-                <div className="sidebar-footer">
-                    <a href="#" className="sidebar-link">
-                        <FontAwesomeIcon icon={faRightFromBracket} />
-                        <span>Logout</span>
-                    </a>
-                </div>
             </aside>
             <div className="main p-3">
-                <div className="text-center">
-                    {showGreeting && (user ? (<h2>Hi, {user.name}</h2>) : (<h2>No user data available</h2>))}
+                <div>
                     <Outlet />
                 </div>
             </div>
         </div>
+        </>
     );
 }

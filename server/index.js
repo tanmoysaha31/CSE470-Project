@@ -3,6 +3,7 @@ const cors = require('cors');
 const {mongoose} = require('mongoose');
 const dotenv = require('dotenv').config();
 const cookieParser = require('cookie-parser');
+const path = require('path');
 const app = express();
 
 
@@ -17,6 +18,14 @@ app.use(express.json());
 app.use(cookieParser()); 
 app.use(express.urlencoded({extended: false}))
 
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Enable CORS
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:5173' // your frontend URL
+}));
 
 app.use('/',require('./routes/authRoutes'));
 

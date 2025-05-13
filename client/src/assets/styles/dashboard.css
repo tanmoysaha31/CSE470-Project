@@ -18,6 +18,7 @@ li {
 h1 {
     font-weight: 600;
     font-size: 1.5rem;
+    color: var(--text-primary);
 }
 
 body {
@@ -26,29 +27,50 @@ body {
 
 .wrapper {
     display: flex;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
 .main {
     min-height: 100vh;
     width: 100%;
-    overflow: hidden;
+    overflow-y: auto;
     transition: all 0.35s ease-in-out;
-    background-color: #fafbfe;
+    background-color: var(--bg-secondary);
+    padding-bottom: 2rem;
+}
+
+/* Add specific styling for pages that need full height like Lifesyncai */
+.main > div {
+    width: 100%;
+    height: 100%;
+}
+
+/* Remove padding for certain full-height components */
+.main > div > .ai-chat-wrapper {
+    margin: -1rem;
+    height: calc(100vh - 64px);
 }
 
 #sidebar {
     width: 90px;
     min-width: 70px;
     z-index: 1000;
-    transition: all .25s ease-in-out;
-    background-color: #dee5ec;
+    transition: all .15s ease-in-out;
+    background-color: var(--sidebar-bg);
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #sidebar.expand {
-    width: 260px;
-    min-width: 260px;
+    width: 190px;
+    min-width: 190px;
 }
 
 .toggle-btn {
@@ -60,7 +82,7 @@ body {
 
 .toggle-btn i, .toggle-btn svg {
     font-size: 1.5rem;
-    color: #000000;
+    color: var(--sidebar-text);
 }
 
 .sidebar-logo {
@@ -68,7 +90,7 @@ body {
 }
 
 .sidebar-logo a, .sidebar-logo span {
-    color: #000000;
+    color: var(--sidebar-text);
     font-size: 1.15rem;
     font-weight: 600;
 }
@@ -85,7 +107,7 @@ body {
 
 a.sidebar-link {
     padding: .625rem 1.625rem;
-    color: #070000;
+    color: var(--sidebar-text);
     display: block;
     font-size: 0.9rem;
     white-space: nowrap;
@@ -98,15 +120,14 @@ a.sidebar-link {
 }
 
 a.sidebar-link:hover {
-    background-color: rgba(37, 35, 35, 0.164);
-    color: #000000;
+    background-color: var(--sidebar-hover);
+    color: var(--sidebar-text);
     border-radius: 1rem;
-    /* transition: all .2s ease-in-out; */
 }
 
 a.sidebar-link.active {
-    background-color: rgba(37, 35, 35, 0.164);
-    color: #000000;
+    background-color: var(--sidebar-hover);
+    color: var(--sidebar-text);
     border-radius: 1rem;
     font-weight: bold;
 }
@@ -119,7 +140,7 @@ a.sidebar-link.active {
     position: absolute;
     top: 0;
     left: 70px;
-    background-color: #d4dfeb;
+    background-color: var(--sidebar-bg);
     padding: 0;
     min-width: 15rem;
     display: none;
@@ -153,5 +174,52 @@ a.sidebar-link.active {
 .sidebar-footer {
     padding: 1.5rem;
     margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Add at the end of the file */
+.auth-menu-container {
+    position: relative;
+}
+
+.auth-popup-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 9999;
+    animation: menuFadeIn 0.2s ease-in-out;
+}
+
+.auth-menu-item {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.auth-menu-item:hover {
+    background-color: var(--sidebar-hover);
+    color: var(--text-primary);
+}
+
+.auth-divider {
+    margin: 8px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

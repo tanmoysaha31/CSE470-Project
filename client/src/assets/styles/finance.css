@@ -1,0 +1,504 @@
+.finance-container {
+    padding: 2rem;
+    padding-top: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+}
+
+.income-section {
+    position: sticky;
+    top: 64px;
+    background-color: var(--bg-primary);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px var(--navbar-shadow);
+    z-index: 100;
+}
+
+.income-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.income-form label {
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.income-form input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.balance {
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.expenses-section {
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--navbar-shadow);
+}
+
+.expense-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 2rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.expense-form .form-field:nth-child(1) {
+    grid-column: 1 / 2;
+}
+
+.expense-form .form-field:nth-child(2) {
+    grid-column: 2 / 3;
+}
+
+.expense-form .form-field:nth-child(3) {
+    grid-column: 3 / 4;
+}
+
+.expense-form button {
+    grid-column: 4 / 5;
+    align-self: end;
+    height: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+.expense-edit {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) auto;
+    gap: 0.5rem;
+    width: 100%;
+    align-items: start;
+}
+
+.expense-edit .form-field:nth-child(1) {
+    grid-column: 1 / 2;
+}
+
+.expense-edit .form-field:nth-child(2) {
+    grid-column: 2 / 3;
+}
+
+.expense-edit .form-field:nth-child(3) {
+    grid-column: 3 / 4;
+}
+
+.expense-edit .edit-buttons {
+    grid-column: 4 / 5;
+    display: flex;
+    gap: 0.5rem;
+    align-self: end;
+}
+
+@media (max-width: 1024px) {
+    .expense-form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .expense-form .form-field:nth-child(1) {
+        grid-column: 1 / 2;
+    }
+    
+    .expense-form .form-field:nth-child(2) {
+        grid-column: 2 / 3;
+    }
+    
+    .expense-form .form-field:nth-child(3) {
+        grid-column: 1 / 2;
+    }
+    
+    .expense-form button {
+        grid-column: 2 / 3;
+        margin-top: 1.5rem;
+    }
+    
+    .expense-edit {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .expense-edit .form-field:nth-child(1) {
+        grid-column: 1 / 2;
+    }
+    
+    .expense-edit .form-field:nth-child(2) {
+        grid-column: 2 / 3;
+    }
+    
+    .expense-edit .form-field:nth-child(3) {
+        grid-column: 1 / 2;
+    }
+    
+    .expense-edit .edit-buttons {
+        grid-column: 2 / 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .expense-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .expense-form .form-field:nth-child(1),
+    .expense-form .form-field:nth-child(2),
+    .expense-form .form-field:nth-child(3),
+    .expense-form button {
+        grid-column: 1 / 2;
+    }
+    
+    .expense-edit {
+        grid-template-columns: 1fr;
+    }
+    
+    .expense-edit .form-field:nth-child(1),
+    .expense-edit .form-field:nth-child(2),
+    .expense-edit .form-field:nth-child(3),
+    .expense-edit .edit-buttons {
+        grid-column: 1 / 2;
+    }
+    
+    .edit-buttons {
+        justify-content: space-between;
+        margin-top: 0.5rem;
+    }
+}
+
+.expense-form select,
+.expense-edit select {
+    appearance: menulist;
+    min-width: 100%;
+    font-size: 1rem;
+}
+
+.expense-form select:focus,
+.expense-edit select:focus {
+    outline: none;
+    border-color: var(--sidebar-hover);
+    box-shadow: 0 0 0 2px rgba(var(--sidebar-hover-rgb), 0.2);
+}
+
+.expenses-list {
+    flex: 1;
+    max-height: 260px;
+    overflow-y: auto;
+    display: grid;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem; /* Reduced padding */
+    background-color: var(--bg-primary);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 0; /* Remove bottom margin since we're using grid gap */
+    min-height: 40px; /* Set a smaller fixed height */
+}
+
+/* Add custom scrollbar styling */
+.expenses-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.expenses-list::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+}
+
+.expenses-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.expenses-list::-webkit-scrollbar-thumb:hover {
+    background: var(--sidebar-hover);
+}
+
+/* Update expense info for more compact layout */
+.expense-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem; /* Reduced gap */
+    flex: 1;
+    padding: 0 0.25rem;
+}
+
+.expense-info h4 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.category {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+}
+
+.amount {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.expense-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.expense-amount {
+    color: var(--text-primary);
+    font-weight: 500;
+    min-width: 100px;
+    text-align: right;
+}
+
+.editable {
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.editable:hover {
+    background-color: var(--bg-secondary);
+}
+
+.add-expense-section {
+    margin: 2rem 0;
+}
+
+.add-expense-section h3 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.delete-btn:hover {
+    color: #cc0000;
+}
+
+/* Remove the old total-expenses styles and update with new ones */
+.total-expenses {
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.finance-summary {
+    position: sticky;
+    bottom: 0;
+    background-color: var(--bg-primary);
+    padding: 1rem;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 4px var(--navbar-shadow);
+    display: flex;  /* Change from grid to flex */
+    justify-content: space-between;  /* Distribute items evenly */
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+/* Update shared styles for all summary items */
+.total-expenses,
+.current-balance,
+.status-indicator {
+    flex: 1;  /* Make each item take equal space */
+    text-align: center;
+    min-width: 200px;
+    padding: 0 1rem;
+}
+
+.total-expenses h2,
+.current-balance h2,
+.status-indicator h2 {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.total-expenses h3,
+.current-balance h3,
+.status-indicator h3 {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Add dividers between items */
+.current-balance {
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+}
+
+button {
+    background-color: var(--sidebar-bg);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: var(--sidebar-hover);
+}
+
+.finance-settings {
+    position: sticky;
+    bottom: 0;
+    background-color: var(--bg-primary);
+    padding: 1rem;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 4px var(--navbar-shadow);
+    margin-top: auto;
+}
+
+.threshold-settings {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.threshold-settings h3 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.threshold-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.threshold-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.threshold-input input {
+    width: 60px;
+    padding: 0.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.expense-percentage {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.status-indicator h2 {
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Chart styles */
+.finance-charts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+@media (min-width: 1024px) {
+    .finance-charts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .finance-charts .chart-container:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+.chart-container {
+    background-color: var(--bg-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px var(--navbar-shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Add category styling */
+.expense-category {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+    margin: 0 0.5rem;
+}
