@@ -40,3 +40,43 @@
 .read-the-docs {
   color: #888;
 } */
+
+.finance-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.finance-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.finance-form input,
+.finance-form select,
+.finance-form button {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.calendar-container {
+  margin: 20px 0;
+}
+
+.records ul {
+  list-style: none;
+  padding: 0;
+}
+
+.records li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.summary {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/homeNavbar";
 import Home from "./pages/Home";
@@ -27,7 +27,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Dashboard" element={<Dashboard />}>
-        <Route path="Overview" element={<Overview />} />
+          <Route path="Overview" element={<Overview />} />
           <Route path="Profile" element={<Profile />} />
           <Route path="Tasks" element={<Tasks />} />
           <Route path="Calendar" element={<Calendar />} />
