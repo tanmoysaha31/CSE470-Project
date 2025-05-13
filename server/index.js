@@ -4,6 +4,8 @@ const {mongoose} = require('mongoose');
 const dotenv = require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const app = express();
+const authRoutes = require('./routes/authRoutes');
+const financeRoutes = require('./routes/financeRoutes');
 
 
 //db connection
@@ -16,6 +18,9 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json());
 app.use(cookieParser()); 
 app.use(express.urlencoded({extended: false}))
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/finance', financeRoutes);
 
 
 app.use('/',require('./routes/authRoutes'));
