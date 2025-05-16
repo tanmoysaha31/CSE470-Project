@@ -38,14 +38,14 @@ export default function HomeNavbar() {
                     LifeSync
                 </button>
                 <div className="d-flex align-items-center">
-                    <button 
+                    {/* <button 
                         className="btn btn-outline-secondary me-3 d-flex align-items-center gap-2"
                         onClick={toggleTheme}
                         style={{ color: theme === 'light' ? 'black' : 'white' }}
                     >
                         <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} />
                         {theme === 'light' ? 'Dark' : 'Light'} Mode
-                    </button>
+                    </button> */}
                     <ul className="navbar-nav flex-row fs-6">
                         <li className="nav-item me-3">
                             <Link 

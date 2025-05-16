@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { UserContext } from '../../context/userContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCamera, faTrash, faUpload } from '@fortawesome/free-solid-svg-icons';
 import '../assets/styles/profile.css';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
@@ -17,6 +17,7 @@ export default function Profile() {
     password: ''
   });
   const [selectedImage, setSelectedImage] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
   const fileInputRef = useRef(null);
 
   // When user data is available, split the full name into first and last name
@@ -86,7 +87,39 @@ export default function Profile() {
   };
 
   const handleImageClick = () => {
+    setShowOptions(!showOptions);
+  };
+
+  const handleUploadClick = (e) => {
+    e.stopPropagation();
     fileInputRef.current.click();
+    setShowOptions(false);
+  };
+
+  const handleDeleteClick = async (e) => {
+    e.stopPropagation();
+    setShowOptions(false);
+    
+    try {
+      const { data } = await axios.delete(`${SERVER_URL}/delete-profile-picture`, {
+        withCredentials: true
+      });
+      
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        setSelectedImage(null);
+        // Update user context with null profile picture
+        setUser(prevUser => ({
+          ...prevUser,
+          profilePicture: null
+        }));
+        toast.success('Profile picture deleted successfully');
+      }
+    } catch (error) {
+      console.error('Delete failed:', error);
+      toast.error('Failed to delete profile picture');
+    }
   };
 
   const handleImageChange = async (e) => {
@@ -126,6 +159,11 @@ export default function Profile() {
     }
 };
 
+  // Get first letter of first name for avatar
+  const getInitial = () => {
+    return profile.firstName ? profile.firstName.charAt(0).toUpperCase() : '';
+  };
+
   return (
     <div className="profile-container">
       <h1 className="profile-header">Profile</h1>
@@ -144,10 +182,22 @@ export default function Profile() {
                 </>
             ) : (
                 <div className="profile-picture-placeholder">
-                    <FontAwesomeIcon icon={faUser} />
+                    {getInitial() || <FontAwesomeIcon icon={faUser} />}
                     <div className="camera-overlay">
                         <FontAwesomeIcon icon={faCamera} className="camera-icon" />
                     </div>
+                </div>
+            )}
+            {showOptions && (
+                <div className="profile-picture-options">
+                    <button onClick={handleUploadClick} className="option-btn upload-btn">
+                        <FontAwesomeIcon icon={faUpload} /> Upload
+                    </button>
+                    {selectedImage && (
+                        <button onClick={handleDeleteClick} className="option-btn delete-btn">
+                            <FontAwesomeIcon icon={faTrash} /> Delete
+                        </button>
+                    )}
                 </div>
             )}
             <input

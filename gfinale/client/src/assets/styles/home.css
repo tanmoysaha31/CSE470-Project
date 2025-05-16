@@ -13,3 +13,344 @@
     font-size: 1.5rem; /* adjust as needed */
     line-height: 1.4;
 }
+
+/* Hero section styles */
+.hero-section {
+    padding: 120px 0 60px;
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    overflow: hidden;
+}
+
+/* Main feature image */
+.feature-image-container {
+    padding: 40px 0 80px;
+    text-align: center;
+}
+
+.main-feature-image {
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.main-feature-image:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Features section styles */
+.features-section {
+    padding: 40px 0;
+}
+
+.feature-card {
+    padding: 80px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.feature-card:nth-child(odd) {
+    background-color: var(--bg-secondary);
+}
+
+.feature-image {
+    text-align: center;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.feature-image img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease;
+}
+
+.feature-image img:hover {
+    transform: scale(1.02);
+}
+
+.feature-text-container {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.feature-text {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.feature-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.feature-text p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Dark mode feature special styling */
+.dark-mode-feature {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    color: white;
+    padding: 100px 0;
+}
+
+.dark-mode-feature .feature-text h2 {
+    color: white;
+}
+
+.dark-mode-feature .feature-text p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Animation styles */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Add sequential delay to multiple fade-in elements in the same container */
+.hero-section .fade-in:nth-child(1) { transition-delay: 0.1s; }
+.hero-section .fade-in:nth-child(2) { transition-delay: 0.3s; }
+.hero-section .fade-in:nth-child(3) { transition-delay: 0.5s; }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .super-big {
+        font-size: 3rem;
+    }
+    
+    .mid-big {
+        font-size: 1.5rem;
+    }
+    
+    .feature-text h2 {
+        font-size: 2rem;
+    }
+    
+    .feature-text p {
+        font-size: 1.1rem;
+    }
+    
+    .hero-section {
+        padding: 80px 0 40px;
+    }
+    
+    .feature-card {
+        padding: 60px 0;
+    }
+}
+
+/* Modern Footer Styles */
+.modern-footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 60px 0 30px;
+    color: var(--text-primary);
+    position: relative;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 0 20px;
+    min-width: 250px;
+    margin-bottom: 30px;
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-section h3:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #1a73e8, #4285f4);
+    border-radius: 2px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.footer-logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.footer-description {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: var(--bg-primary);
+    border-radius: 50%;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.social-link:hover {
+    background-color: #1a73e8;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 15px;
+}
+
+.footer-links a:before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1a73e8;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #1a73e8;
+    padding-left: 20px;
+}
+
+.footer-section.contact p {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+}
+
+.footer-section.contact p i {
+    margin-right: 10px;
+    color: #1a73e8;
+    width: 20px;
+    text-align: center;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-links a:hover {
+    color: #1a73e8;
+}
+
+/* Dark mode footer adjustments */
+:root[data-theme="dark"] .modern-footer {
+    background-color: #222;
+    border-top-color: #333;
+}
+
+:root[data-theme="dark"] .social-link {
+    background-color: #333;
+    color: #fff;
+}
+
+:root[data-theme="dark"] .social-link:hover {
+    background-color: #1a73e8;
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+    
+    .footer-section {
+        margin-bottom: 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-bottom-links {
+        justify-content: center;
+        margin-top: 10px;
+    }
+}

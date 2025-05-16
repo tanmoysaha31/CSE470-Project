@@ -5,7 +5,7 @@ const { test, registerUser, loginUser, getProfile, updateProfile } = require('..
 const { generateResponse } = require('../controllers/aiController');
 const { createChat, getChats, getChat, updateChat, deleteChat } = require('../controllers/chatController');
 const upload = require('../middleware/uploadMiddleware');
-const { uploadProfilePicture } = require('../controllers/uploadController');
+const { uploadProfilePicture, deleteProfilePicture } = require('../controllers/uploadController');
 const financeController = require('../controllers/financeController');
 const { requireSignIn } = require('../middleware/authMiddleware');
 
@@ -34,6 +34,7 @@ router.put('/chats/:id', requireSignIn, updateChat);
 router.delete('/chats/:id', requireSignIn, deleteChat);
 
 router.post('/upload-profile-picture', requireSignIn, upload.single('profilePicture'), uploadProfilePicture);
+router.delete('/delete-profile-picture', requireSignIn, deleteProfilePicture);
 
 // Add this route
 router.post('/logout', (req, res) => {
