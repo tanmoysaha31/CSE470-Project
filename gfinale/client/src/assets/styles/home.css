@@ -1,0 +1,15 @@
+.super-big {
+    font-size: 4rem; /* adjust as needed */
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.mid-big {
+    font-size: 2rem; /* adjust as needed */
+    line-height: 1.4;
+}
+
+.mid-mid {
+    font-size: 1.5rem; /* adjust as needed */
+    line-height: 1.4;
+}
