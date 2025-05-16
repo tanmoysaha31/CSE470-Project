@@ -1,29 +1,29 @@
 .calendar-container {
-  background-color: white;
+  background-color: var(--bg-primary);
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-  padding: 20px;
-  height: calc(100vh - 120px);
-  overflow: hidden;
+  padding: 15px;
+  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  overflow: hidden;
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 15px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #f1f3f4;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .title-section h3 {
   margin: 0;
   font-size: 22px;
   font-weight: 400;
-  color: #3c4043;
+  color: var(--text-primary);
 }
 
 .controls-section {
@@ -34,42 +34,88 @@
 
 .calendar-wrapper {
   flex-grow: 1;
-  overflow: auto;
-  height: 85vh;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* FullCalendar Customizations */
 .fc {
-  --fc-border-color: #e0e0e0;
+  --fc-border-color: var(--border-color);
   --fc-event-bg-color: #4285f4;
   --fc-event-border-color: #4285f4;
   --fc-today-bg-color: #e8f0fe;
-  --fc-page-bg-color: #fff;
-  --fc-neutral-bg-color: #f8f9fa;
+  --fc-page-bg-color: var(--bg-primary);
+  --fc-neutral-bg-color: var(--bg-secondary);
+  height: 100%;
+}
+
+/* Make sure the calendar view fills the available space */
+.fc-view-harness {
+  height: 100% !important;
+}
+
+/* Make sure the grid expands properly */
+.fc .fc-view {
+  height: 100%;
+}
+
+.fc-view table {
+  height: 100%;
+}
+
+:root[data-theme="dark"] .fc {
+  --fc-border-color: #333;
+  --fc-event-bg-color: #4285f4;
+  --fc-event-border-color: #4285f4;
+  --fc-today-bg-color: #2d2d2d;
+  --fc-page-bg-color: var(--bg-primary);
+  --fc-neutral-bg-color: var(--bg-secondary);
+  --fc-button-text-color: var(--text-primary);
+  --fc-button-bg-color: #2d2d2d;
+  --fc-button-border-color: #444;
+  --fc-button-hover-bg-color: #3a3a3a;
+  --fc-button-hover-border-color: #555;
+  --fc-button-active-bg-color: #4d4d4d;
+  --fc-button-active-border-color: #666;
+}
+
+:root[data-theme="dark"] .fc-theme-standard th {
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .fc-theme-standard td {
+  border-color: #333;
+}
+
+:root[data-theme="dark"] .fc .fc-daygrid-day-number,
+:root[data-theme="dark"] .fc .fc-col-header-cell-cushion {
+  color: var(--text-primary);
 }
 
 .fc-theme-standard th {
-  padding: 10px 0;
+  padding: 12px 0;
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 500;
-  color: #70757a;
+  color: var(--text-secondary);
   border-width: 0;
-  background-color: #f8f9fa;
+  background-color: var(--bg-secondary);
 }
 
 .fc-theme-standard td {
-  border-color: #e0e0e0;
+  border-color: var(--border-color);
 }
 
 .fc .fc-col-header-cell-cushion {
-  padding: 6px 4px;
+  padding: 8px 4px;
+  color: var(--text-secondary);
 }
 
 .fc .fc-daygrid-day-number {
-  padding: 6px 8px;
-  font-size: 12px;
-  color: #3c4043;
+  padding: 8px;
+  font-size: 13px;
+  color: var(--text-primary);
 }
 
 .fc .fc-daygrid-day.fc-day-today {
@@ -81,22 +127,36 @@
   background-color: #1a73e8;
   color: white;
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
 }
 
+/* Ensure day cells have a minimum height */
 .fc-daygrid-day-frame {
-  min-height: 100px;
+  min-height: 120px;
 }
 
+/* Make all day cells the same width */
 .fc-col-header-cell, .fc-daygrid-day {
   width: calc(100% / 7);
 }
 
+/* Make week rows expand to fill available space */
+.fc-daygrid-body, .fc-scrollgrid-sync-table {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Make all rows the same height */
+.fc-daygrid-body tr {
+  height: 1fr;
+}
+
+/* Events styling */
 .fc-event {
   cursor: pointer;
   border-radius: 4px;
@@ -161,9 +221,9 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
-  background-color: white;
-  border: 1px solid #dadce0;
-  color: #3c4043;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -189,7 +249,7 @@
 }
 
 .btn:hover {
-  background-color: #f1f3f4;
+  background-color: var(--bg-secondary);
 }
 
 .btn-primary {
@@ -216,12 +276,12 @@
 
 .btn-outline-primary {
   background-color: transparent;
-  border-color: #dadce0;
+  border-color: var(--border-color);
   color: #1a73e8;
 }
 
 .btn-outline-primary:hover {
-  background-color: #f6fafe;
+  background-color: var(--bg-secondary);
 }
 
 .add-button {

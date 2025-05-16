@@ -113,9 +113,15 @@ exports.generateResponse = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decoded.id;
 
-        // Initialize model with standard Gemini Pro model
+        // Initialize model with Gemini model that has better context handling
         const model = genAI.getGenerativeModel({ 
-            model: "models/gemini-1.5-flash-002"
+            model: "models/gemini-1.5-flash-002",
+            generationConfig: {
+                temperature: 0.7,
+                topP: 0.8,
+                topK: 40,
+                maxOutputTokens: 2048,
+            }
         });
         
         if (!model) {
@@ -175,6 +181,14 @@ ${contextData.taskContext}
 ${contextData.financeContext}
 ${contextData.notesContext}
 
+IMPORTANT ABILITIES:
+1. You can analyze budget allocation and provide financial insights based on actual spending vs. budgeted amounts.
+2. You can track the user's expenses by category and suggest ways to optimize spending.
+3. You can help with budget planning and financial goal-setting.
+4. You remember previous messages in this conversation and can refer back to them as needed.
+
+When discussing finances, remember to differentiate between actual spending and budgeted amounts.
+
 Always be helpful, concise, and friendly in your responses. If you reference data from the user's tasks, finances, or notes, make it clear where that information comes from.`;
 
                 // Add system message at the beginning of history
@@ -183,7 +197,7 @@ Always be helpful, concise, and friendly in your responses. If you reference dat
                     parts: [{ text: "System: " + initialContext }]
                 }, {
                     role: "model",
-                    parts: [{ text: "I understand. I'll help you manage your tasks, finances, notes, and answer other questions. What can I assist you with today?" }]
+                    parts: [{ text: "I understand. I'll help you manage your tasks, finances, notes, and answer other questions with an emphasis on your budget allocation and financial planning. What can I assist you with today?" }]
                 });
             }
             
@@ -206,12 +220,20 @@ ${contextData.taskContext}
 ${contextData.financeContext}
 ${contextData.notesContext}
 
+IMPORTANT ABILITIES:
+1. You can analyze budget allocation and provide financial insights based on actual spending vs. budgeted amounts.
+2. You can track the user's expenses by category and suggest ways to optimize spending.
+3. You can help with budget planning and financial goal-setting.
+4. You remember previous messages in this conversation and can refer back to them as needed.
+
+When discussing finances, remember to differentiate between actual spending and budgeted amounts.
+
 Always be helpful, concise, and friendly in your responses. If you reference data from the user's tasks, finances, or notes, make it clear where that information comes from.`;
 
             try {
                 const initialHistory = [
                     { role: "user", parts: [{ text: "System: " + initialContext }] },
-                    { role: "model", parts: [{ text: "I understand. I'll help you manage your tasks, finances, notes, and answer other questions. What can I assist you with today?" }] }
+                    { role: "model", parts: [{ text: "I understand. I'll help you manage your tasks, finances, notes, and answer other questions with an emphasis on your budget allocation and financial planning. What can I assist you with today?" }] }
                 ];
                 
                 chat = await model.startChat({
@@ -334,30 +356,60 @@ ${futureTasks.map(task => `- ${task.title} (Scheduled: ${new Date(task.start).to
             // Calculate total expenses
             const totalExpenses = finance.expenses.reduce((total, expense) => total + expense.amount, 0);
             
-            // Group expenses by category
+            // Calculate total budgeted amount
+            const totalBudgeted = finance.expenses.reduce((total, expense) => total + (expense.budget || 0), 0);
+            
+            // Calculate remaining budget
+            const remainingBudget = finance.budget - totalBudgeted;
+            
+            // Calculate budget allocation percentage
+            const budgetAllocationPercentage = finance.budget > 0 ? ((totalBudgeted / finance.budget) * 100).toFixed(1) : 0;
+            
+            // Group expenses by category with both actual and budgeted amounts
             const expensesByCategory = {};
             finance.expenses.forEach(expense => {
                 const category = expense.category || 'Other';
                 if (!expensesByCategory[category]) {
-                    expensesByCategory[category] = 0;
+                    expensesByCategory[category] = {
+                        actual: 0,
+                        budgeted: 0
+                    };
                 }
-                expensesByCategory[category] += expense.amount;
+                expensesByCategory[category].actual += expense.amount;
+                expensesByCategory[category].budgeted += (expense.budget || 0);
             });
 
-            // Format finance information
+            // Format finance information with budget allocation details
             financeContext = `
 Here's your financial information:
 
 Monthly Income: $${finance.income.toFixed(2)}
+Monthly Budget: $${finance.budget.toFixed(2)}
 Total Expenses: $${totalExpenses.toFixed(2)}
 Current Balance: $${(finance.income - totalExpenses).toFixed(2)}
 Budget Status: ${totalExpenses > finance.income ? 'Exceeded' : (totalExpenses/finance.income > 0.9 ? 'Critical' : (totalExpenses/finance.income > 0.7 ? 'Warning' : 'Good'))}
 
+Budget Allocation:
+- Total Budget Allocated: $${totalBudgeted.toFixed(2)} (${budgetAllocationPercentage}% of budget)
+- Budget Remaining: $${remainingBudget.toFixed(2)}
+
 Expenses by Category:
 ${Object.entries(expensesByCategory)
-    .sort((a, b) => b[1] - a[1])
-    .map(([category, amount]) => `- ${category}: $${amount.toFixed(2)} (${finance.income > 0 ? ((amount/finance.income)*100).toFixed(1) : 0}% of income)`)
+    .sort((a, b) => b[1].actual - a[1].actual)
+    .map(([category, amounts]) => {
+        const actualAmount = amounts.actual;
+        const budgetedAmount = amounts.budgeted;
+        const percentOfIncome = finance.income > 0 ? ((actualAmount/finance.income)*100).toFixed(1) : 0;
+        const budgetUtilization = budgetedAmount > 0 ? ((actualAmount/budgetedAmount)*100).toFixed(1) : 0;
+        
+        return `- ${category}: 
+  * Actual: $${actualAmount.toFixed(2)} (${percentOfIncome}% of income)
+  * Budgeted: $${budgetedAmount.toFixed(2)}
+  * Budget Utilization: ${budgetUtilization}%`;
+    })
     .join('\n')}
+
+You can help with budget recommendations, expense analysis, and financial planning based on this data.
 `;
         }
 

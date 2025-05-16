@@ -134,7 +134,7 @@ export default function DashboardNavbar() {
                     </button>
 
                     {/* Notification Bell */}
-                    <div className="notification-menu-container me-3">
+                    {/* <div className="notification-menu-container me-3">
                         <button 
                             ref={notificationButtonRef}
                             className="btn d-flex align-items-center justify-content-center"
@@ -166,7 +166,7 @@ export default function DashboardNavbar() {
                                 </div>
                             </div>
                         )}
-                    </div>
+                    </div> */}
 
                     {/* Profile Button */}
                     <div className="auth-menu-container">

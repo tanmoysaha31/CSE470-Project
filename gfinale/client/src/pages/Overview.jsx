@@ -605,7 +605,7 @@ export default function Overview() {
           <div className="card-header">
             <div className="card-title">
               <FontAwesomeIcon icon={faBrain} className="card-icon" />
-              AI Suggestions
+              Suggestions
             </div>
             <span className="card-action" onClick={() => navigateTo('Lifesyncai')}>Ask AI</span>
           </div>

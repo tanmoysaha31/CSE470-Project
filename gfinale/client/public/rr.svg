@@ -1,0 +1,17 @@
+<svg width="360" height="80" viewBox="0 0 360 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="viteGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FF4D6D" offset="0%" />
+      <stop stop-color="#8338EC" offset="40%" />
+      <stop stop-color="#FB5607" offset="70%" />
+      <stop stop-color="#FFBA08" offset="100%" />
+    </linearGradient>
+  </defs>
+  <path
+    d="M20 10 L50 40 L20 70 L40 70 L70 40 L40 10 Z"
+    fill="url(#viteGradient)"
+  />
+  <text x="90" y="50" font-family="Segoe UI, Tahoma, Geneva, Verdana, sans-serif" font-weight="700" font-size="40" fill="url(#viteGradient)">
+    LifeSync
+  </text>
+</svg>
